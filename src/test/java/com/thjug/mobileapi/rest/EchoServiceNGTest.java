@@ -12,29 +12,31 @@
  * http://creativecommons.org/licenses/by/3.0/legalcode
  * </pre>
  */
-package com.thjug.model;
 
-import java.io.IOException;
-import org.codehaus.jackson.map.ObjectMapper;
+package com.thjug.mobileapi.rest;
+
+import javax.ws.rs.core.UriInfo;
+import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author nuboat
  */
-public class AccountNGTest {
+public class EchoServiceNGTest {
+
+	private final UriInfo context = Mockito.mock(UriInfo.class);
 
 	@Test
-	public void testGetId() throws IOException {
-		final Account instance = new Account();
-		instance.setId(1L);
-		instance.setUsername("nuboat");
-		instance.setFirstname("Peerapat");
-		instance.setLastname("A");
+	public void testPost() {
+		when(context.getPath()).thenReturn("/echo");
 
-		final ObjectMapper mapper = new ObjectMapper();
-		final String json = mapper.writeValueAsString(instance);
-		System.out.println(json);
+		final String message = "hello";
+		final EchoService instance = new EchoService();
+		final String result = instance.post(context, message);
+		Assert.assertNotNull(result);
 	}
 
 }

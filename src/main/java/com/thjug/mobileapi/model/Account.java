@@ -12,7 +12,7 @@
  * http://creativecommons.org/licenses/by/3.0/legalcode
  * </pre>
  */
-package com.thjug.model;
+package com.thjug.mobileapi.model;
 
 import java.io.Serializable;
 
