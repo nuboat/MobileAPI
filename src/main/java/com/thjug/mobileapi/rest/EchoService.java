@@ -13,8 +13,9 @@
  * </pre>
  */
 
-package com.thjug.mobileapi;
+package com.thjug.mobileapi.rest;
 
+import com.thjug.mobileapi.interceptor.Logging;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.FormParam;
@@ -34,6 +35,7 @@ public class EchoService {
 	private static final Logger LOG = LoggerFactory.getLogger(EchoService.class);
 
 	@POST
+	@Logging
 	@Produces("application/json")
 	public String post(
 			@Context UriInfo context,

@@ -39,8 +39,8 @@ public class ApplicationConfig extends Application {
 	 * If required, comment out calling this method in getClasses().
 	 */
 	private void addRestResourceClasses(Set<Class<?>> resources) {
-		resources.add(com.thjug.mobileapi.AccountService.class);
-		resources.add(com.thjug.mobileapi.EchoService.class);
+		resources.add(com.thjug.mobileapi.rest.AccountService.class);
+		resources.add(com.thjug.mobileapi.rest.EchoService.class);
 	}
 
 }

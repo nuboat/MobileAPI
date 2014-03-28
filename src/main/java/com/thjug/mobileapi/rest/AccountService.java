@@ -13,9 +13,10 @@
  * </pre>
  */
 
-package com.thjug.mobileapi;
+package com.thjug.mobileapi.rest;
 
-import com.thjug.model.Account;
+import com.thjug.mobileapi.interceptor.Logging;
+import com.thjug.mobileapi.model.Account;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.core.Context;
@@ -54,6 +55,7 @@ public class AccountService {
 	}
 
 	@POST
+	@Logging
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response post(
