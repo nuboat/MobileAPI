@@ -15,13 +15,15 @@
 
 package com.thjug.mobileapi.rest;
 
-import com.thjug.mobileapi.interceptor.Logging;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
+import com.thjug.mobileapi.interceptor.LoggingInterceptor;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,13 +32,13 @@ import org.slf4j.LoggerFactory;
  * @author nuboat
  */
 @Path("echo")
+@Produces(MediaType.APPLICATION_JSON)
+@Interceptors(LoggingInterceptor.class)
 public class EchoService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EchoService.class);
 
 	@POST
-	@Logging
-	@Produces("application/json")
 	public String post(
 			@Context UriInfo context,
 			@FormParam("message") final String message) {

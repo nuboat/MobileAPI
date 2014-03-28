@@ -15,16 +15,16 @@
 package com.thjug.mobileapi.rest;
 
 import com.thjug.mobileapi.model.Account;
-import static org.mockito.Mockito.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.when;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  *
- * @author PeerapatAsoktummarun
+ * @author nuboat
  */
 public class AccountServiceNGTest {
 
@@ -34,22 +34,21 @@ public class AccountServiceNGTest {
 	public void testGet() {
 		when(context.getPath()).thenReturn("/echo");
 
-		Long id = null;
-		AccountService instance = new AccountService();
-		Response expResult = null;
-		Response result = instance.get(context, id);
-		Assert.assertEquals(result, expResult);
+		final Long id = 1L;
+		final AccountService instance = new AccountService();
+		final Response result = instance.get(context, id);
+		Assert.assertNotNull(result);
 	}
 
 	@Test
 	public void testPost() {
 		when(context.getPath()).thenReturn("/echo");
-		
-		Account account = null;
-		AccountService instance = new AccountService();
-		Response expResult = null;
-		Response result = instance.post(context, account);
-		Assert.assertEquals(result, expResult);
+
+		final Account account = new Account();
+		account.setId(1L);
+		final AccountService instance = new AccountService();
+		final Response result = instance.post(context, account);
+		Assert.assertNotNull(result);
 	}
 
 }

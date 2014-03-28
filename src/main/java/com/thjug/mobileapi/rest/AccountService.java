@@ -15,17 +15,19 @@
 
 package com.thjug.mobileapi.rest;
 
-import com.thjug.mobileapi.interceptor.Logging;
+import com.thjug.mobileapi.interceptor.LoggingInterceptor;
 import com.thjug.mobileapi.model.Account;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,13 +36,14 @@ import org.slf4j.LoggerFactory;
  * @author nuboat
  */
 @Path("account")
+@Produces(MediaType.APPLICATION_JSON)
 public class AccountService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AccountService.class);
 
 	@GET
 	@Path("{id}")
-	@Produces("application/json")
+	@Interceptors(LoggingInterceptor.class)
 	public Response get(
 			@Context final UriInfo context,
 			@PathParam("id") final Long id) {
@@ -51,19 +54,18 @@ public class AccountService {
 		account.setFirstname("Peerapat");
 		account.setLastname("A");
 
-		return Response.status(200).entity(account).build();
+		return Response.status(Response.Status.OK).entity(account).build();
 	}
 
 	@POST
-	@Logging
-	@Consumes("application/json")
-	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Interceptors(LoggingInterceptor.class)
 	public Response post(
 			@Context final UriInfo context,
 			final Account account) {
 		LOG.info(" \n URL: {} \n Username: {}", context.getPath(), account.getUsername());
 
-		return Response.status(200).entity(account).build();
+		return Response.status(Response.Status.OK).entity(account).build();
 	}
 
 }

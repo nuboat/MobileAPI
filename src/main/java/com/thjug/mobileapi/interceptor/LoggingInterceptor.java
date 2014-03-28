@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 public class LoggingInterceptor {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LoggingInterceptor.class);
-	
+
 	@AroundInvoke
 	public Object intercept(final InvocationContext context) throws Exception {
 		final long start = System.currentTimeMillis();
@@ -40,7 +40,7 @@ public class LoggingInterceptor {
 			final long running = end - start;
 
 			LOG.info("Run {}.{} in {} ms.",
-					context.getTarget().getClass().getSimpleName(),
+					context.getTarget().getClass().getSimpleName().replace("$Proxy$_$$_WeldSubclass", ""),
 					context.getMethod().getName(),
 					running);
 		}
