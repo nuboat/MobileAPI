@@ -9,12 +9,25 @@
 
 	<name>MobileAPI</name>
 
+	<organization>
+		<name>THJUG</name>
+		<url>https://github.com/nuboat/mobileapi</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>@nuboat</id>
+			<name>Peerapat Asoktummarungsri</name>
+		</developer>
+	</developers>
+
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<glassfish4.home>C:/Program Files/glassfish-4.0/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish4.home>
+		<glassfish4.home.window>C:/Program Files/glassfish-4.0/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish4.home.window>
+		<glassfish4.home.osx>/Applications/NetBeans/glassfish-4.0/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish4.home.osx>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>Java.Net (public)</id>
@@ -26,14 +39,13 @@
 		</repository>
 	</repositories>
 
-    
 	<dependencies>
 		<dependency>
 			<groupId>org.glassfish.main.extras</groupId>
 			<artifactId>glassfish-embedded-static-shell</artifactId>
 			<version>4.0</version>
 			<scope>system</scope>
-			<systemPath>${glassfish4.home}</systemPath>
+			<systemPath>${glassfish4.home.osx}</systemPath>
 		</dependency>
 
 		<dependency>
