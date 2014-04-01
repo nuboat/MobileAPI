@@ -45,7 +45,7 @@
 			<artifactId>glassfish-embedded-static-shell</artifactId>
 			<version>4.0</version>
 			<scope>system</scope>
-			<systemPath>${glassfish4.home.osx}</systemPath>
+			<systemPath>${glassfish4.home.window}</systemPath>
 		</dependency>
 
 		<dependency>
@@ -123,6 +123,18 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<systemPropertyVariables>
+						<glassfish_home>C:/Program Files/glassfish-4.0/glassfish</glassfish_home>
+					</systemPropertyVariables>
+					<argLine>-Xverify:none</argLine>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
@@ -142,6 +154,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>

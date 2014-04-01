@@ -12,29 +12,25 @@
  * http://creativecommons.org/licenses/by/3.0/legalcode
  * </pre>
  */
-package com.thjug.mobileapi.model;
+package com.thjug.mobileapi.facade;
 
-import java.io.IOException;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.thjug.mobileapi.container.GlassfishContainer;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author nuboat
  */
-public class AccountNGTest {
+public class PropertyFacadeNGTest {
 
 	@Test
-	public void testGetId() throws IOException {
-		final Account instance = new Account();
-		instance.setId(1L);
-		instance.setUsername("nuboat");
-		instance.setFirstname("Peerapat");
-		instance.setLastname("A");
+	public void testGetString() throws Exception {
+		final String id = "VERSION";
+		final PropertyFacade instance = GlassfishContainer.lookup(PropertyFacade.class);
+		final String result = instance.getString(id);
 
-		final ObjectMapper mapper = new ObjectMapper();
-		final String json = mapper.writeValueAsString(instance);
-		System.out.println(json);
+		Assert.assertNotNull(result);
 	}
 
 }
