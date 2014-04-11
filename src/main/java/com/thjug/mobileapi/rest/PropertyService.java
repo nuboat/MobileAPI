@@ -15,14 +15,18 @@
 
 package com.thjug.mobileapi.rest;
 
+import com.thjug.mobileapi.entity.Property;
 import com.thjug.mobileapi.interceptor.LoggingInterceptor;
+import com.thjug.mobileapi.manager.PropertyManager;
+import javax.ejb.EJB;
 import javax.interceptor.Interceptors;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,20 +35,26 @@ import org.slf4j.LoggerFactory;
  *
  * @author nuboat
  */
-@Path("echo")
+@Path("property")
 @Produces(MediaType.APPLICATION_JSON)
-@Interceptors(LoggingInterceptor.class)
-public class EchoService {
+public class PropertyService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EchoService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyService.class);
 
-	@POST
+	@EJB
+	private PropertyManager manager;
+
+	@GET
+	@Path("{keyname}")
 	@Interceptors(LoggingInterceptor.class)
-	public String post(
-			@Context UriInfo context,
-			@FormParam("message") final String message) {
-		LOG.info(" \n URL: {} \n message: {}", context.getPath(), message);
-		return "{{{ " + message + " }}}";
+	public Response get(
+			@Context final UriInfo context,
+			@PathParam("keyname") final String keyname) {
+		LOG.info(" \n URL: {} \n Key: {}", context.getPath(), keyname);
+
+		final Property property = manager.get(keyname);
+
+		return Response.status(Response.Status.OK).entity(property).build();
 	}
 
 }

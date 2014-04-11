@@ -18,10 +18,7 @@ package com.thjug.mobileapi;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author Netbeans
- */
+
 @javax.ws.rs.ApplicationPath("rest")
 public class ApplicationConfig extends Application {
 
@@ -32,15 +29,10 @@ public class ApplicationConfig extends Application {
 		return resources;
 	}
 
-	/**
-	 * Do not modify addRestResourceClasses() method.
-	 * It is automatically populated with
-	 * all resources defined in the project.
-	 * If required, comment out calling this method in getClasses().
-	 */
 	private void addRestResourceClasses(Set<Class<?>> resources) {
 		resources.add(com.thjug.mobileapi.rest.AccountService.class);
 		resources.add(com.thjug.mobileapi.rest.EchoService.class);
+		resources.add(com.thjug.mobileapi.rest.PropertyService.class);
 	}
 
 }
