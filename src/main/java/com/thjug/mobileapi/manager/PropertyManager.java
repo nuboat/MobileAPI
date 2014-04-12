@@ -31,6 +31,18 @@ public class PropertyManager {
 	@PersistenceContext
 	private EntityManager em;
 
+	public void insert(final Property p) {
+		em.persist(p);
+	}
+
+	public void update(final Property p) {
+		em.merge(p);
+	}
+
+	public void delete(final Property p) {
+		em.remove(em.merge(p));
+	}
+
 	public Property get(final String id) {
 		return em.find(Property.class, id);
 	}

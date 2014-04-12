@@ -25,9 +25,9 @@ public class GlassfishContainer {
 
 	private static EJBContainer container;
 
-	private static final String GLASSFISH_ROOT = "org.glassfish.ejb.embedded.glassfish.installation.root";
-	private static final String DOMAIN_ROOT = "org.glassfish.ejb.embedded.glassfish.instance.root";
-	private static final String DOMAINXML_ROOT = "org.glassfish.ejb.embedded.glassfish.configuration.file";
+//	private static final String GLASSFISH_ROOT = "org.glassfish.ejb.embedded.glassfish.installation.root";
+//	private static final String DOMAIN_ROOT = "org.glassfish.ejb.embedded.glassfish.instance.root";
+//	private static final String DOMAINXML_ROOT = "org.glassfish.ejb.embedded.glassfish.configuration.file";
 
 	@BeforeSuite
 	public static void initial() {
@@ -47,20 +47,17 @@ public class GlassfishContainer {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T lookup(final Class<? extends T> type) throws NamingException {
-		return (T) getContext().lookup("java:global/classes/" + type.getSimpleName());
-		//return (T) getContext().lookup("java:global/" + APP_NAME + "/classes/" + type.getSimpleName());
+		return (T) getContext().lookup("java:global/classes/" + type.getSimpleName()); //getContext().lookup("java:global/" + APP_NAME + "/classes/" + type.getSimpleName());
 	}
 
 	private static Context createContainer() {
 //		final String glassfish_home = System.getProperty("glassfish_home");
-//
 //		final Properties properties = new Properties();
 //		properties.put(GLASSFISH_ROOT, glassfish_home);
 //		properties.put(DOMAIN_ROOT, glassfish_home + "/domains/domain1");
 //		properties.put(DOMAINXML_ROOT, glassfish_home + "/domains/domain1/config/domain.xml");
-//		//properties.put(EJBContainer.APP_NAME, APP_NAME);
-//
 //		container = EJBContainer.createEJBContainer(properties);
+
 		container = EJBContainer.createEJBContainer();
 		return container.getContext();
 	}

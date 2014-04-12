@@ -15,6 +15,8 @@
 package com.thjug.mobileapi.manager;
 
 import com.thjug.mobileapi.container.GlassfishContainer;
+import com.thjug.mobileapi.entity.Property;
+import javax.naming.NamingException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,13 +26,61 @@ import org.testng.annotations.Test;
  */
 public class PropertyManagerNGTest {
 
-	@Test
+	final static String ID = "NAME";
+
+	final Property property;
+	final PropertyManager instance;
+
+	public PropertyManagerNGTest() throws NamingException {
+		instance = GlassfishContainer.lookup(PropertyManager.class);
+
+		property = new Property();
+		property.setId(ID);
+		property.setString("THJUG");
+	}
+
+	@Test(priority = 1)
 	public void testGetString() throws Exception {
+		System.out.println("testGetString");
+
 		final String id = "VERSION";
-		final PropertyManager instance = GlassfishContainer.lookup(PropertyManager.class);
 		final String result = instance.getString(id);
 
 		Assert.assertNotNull(result);
+	}
+
+	@Test(priority = 2)
+	public void testInsert() {
+		System.out.println("testInsert");
+
+		instance.insert(property);
+		Assert.assertNotNull(property.getId());
+	}
+
+	@Test(priority = 3)
+	public void testGet() {
+		System.out.println("testGet");
+
+		Assert.assertNotNull(instance.get(ID));
+	}
+
+	@Test(priority = 4)
+	public void testUpdate() {
+		System.out.println("testUpdate");
+
+		property.setString("THJUG2");
+		instance.update(property);
+
+		final Property p = instance.get(ID);
+		Assert.assertEquals(property.getString(), p.getString());
+	}
+
+	@Test(priority = 5)
+	public void testDelete() {
+		System.out.println("testDelete");
+
+		instance.delete(property);
+		Assert.assertNull(instance.get(property.getId()));
 	}
 
 }
