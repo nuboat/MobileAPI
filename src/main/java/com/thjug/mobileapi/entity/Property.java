@@ -16,6 +16,7 @@ package com.thjug.mobileapi.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -28,10 +29,16 @@ import javax.validation.constraints.Size;
  * @author nuboat
  */
 @Entity
+@Cacheable
 @NamedQueries({
-	@NamedQuery(name = "Property.findAll", query = "SELECT p FROM Property p")})
+	@NamedQuery(name = Property.FIND_ALL, query = "SELECT p FROM Property p ORDER BY p.id"),
+	@NamedQuery(name = Property.FIND_BY_NAME, query = "SELECT p FROM Property p WHERE UPPER(p.id) = UPPER(?1)"),
+	})
 public class Property implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static final String FIND_ALL = "Property.findAll";
+	public static final String FIND_BY_NAME = "Property.findByName";
 
 	@Id
     @Basic(optional = false)
@@ -74,22 +81,18 @@ public class Property implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		return id != null ? id.hashCode() : 0;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
+	public boolean equals(final Object object) {
 		if (!(object instanceof Property)) {
 			return false;
 		}
-		Property other = (Property) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if (id == null) {
 			return false;
 		}
-		return true;
+		return id.equals(((Property) object).id);
 	}
 
 	@Override

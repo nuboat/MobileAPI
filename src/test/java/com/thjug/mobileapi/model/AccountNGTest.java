@@ -16,6 +16,9 @@ package com.thjug.mobileapi.model;
 
 import java.io.IOException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -24,6 +27,13 @@ import org.testng.annotations.Test;
  */
 public class AccountNGTest {
 
+	private static final Logger LOG = LoggerFactory.getLogger(AccountNGTest.class);
+
+	@BeforeTest
+	public void initial() {
+		LOG.info("Start {} times.", System.currentTimeMillis());
+	}
+	
 	@Test
 	public void testGetId() throws IOException {
 		final Account instance = new Account();
@@ -34,7 +44,8 @@ public class AccountNGTest {
 
 		final ObjectMapper mapper = new ObjectMapper();
 		final String json = mapper.writeValueAsString(instance);
-		System.out.println(json);
+
+		LOG.info("Account: {}", json);
 	}
 
 }

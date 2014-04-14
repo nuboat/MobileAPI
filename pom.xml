@@ -24,8 +24,10 @@
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<glassfish4.home.window>C:/Program Files/glassfish-4.0/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish4.home.window>
-		<glassfish4.home.osx>/Applications/NetBeans/glassfish-4.0/glassfish/lib/embedded/glassfish-embedded-static-shell.jar</glassfish4.home.osx>
+		<glassfish4.home.osx>/Applications/NetBeans/glassfish-4.0/glassfish</glassfish4.home.osx>
+		<glassfish4.home.window>C:/Program Files/glassfish-4.0/glassfish</glassfish4.home.window>
+		<glassfish4.home.ubuntu>/temp</glassfish4.home.ubuntu>
+		<glassfish4.home.default>${glassfish4.home.osx}</glassfish4.home.default>
 	</properties>
 
 	<repositories>
@@ -45,7 +47,7 @@
 			<artifactId>glassfish-embedded-static-shell</artifactId>
 			<version>4.0</version>
 			<scope>system</scope>
-			<systemPath>${glassfish4.home.osx}</systemPath>
+			<systemPath>${glassfish4.home.default}/lib/embedded/glassfish-embedded-static-shell.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -126,8 +128,10 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.17</version>
 				<configuration>
+					<parallel>classes</parallel>
+					<threadCount>24</threadCount>
 					<systemPropertyVariables>
-						<glassfish_home>C:/Program Files/glassfish-4.0/glassfish</glassfish_home>
+						<glassfish_home>${glassfish4.home.default}</glassfish_home>
 					</systemPropertyVariables>
 					<argLine>-Xverify:none</argLine>
 				</configuration>
@@ -146,6 +150,7 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

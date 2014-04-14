@@ -16,9 +16,12 @@
 package com.thjug.mobileapi.rest;
 
 import javax.ws.rs.core.UriInfo;
-import static org.mockito.Mockito.*;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.when;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -27,7 +30,14 @@ import org.testng.annotations.Test;
  */
 public class EchoServiceNGTest {
 
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyServiceNGTest.class);
+
 	private final UriInfo context = Mockito.mock(UriInfo.class);
+
+	@BeforeTest
+	public void initial() {
+		LOG.info("Start {} times.", System.currentTimeMillis());
+	}
 
 	@Test
 	public void testPost() {

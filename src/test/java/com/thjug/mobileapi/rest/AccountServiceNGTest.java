@@ -19,7 +19,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -28,8 +31,15 @@ import org.testng.annotations.Test;
  */
 public class AccountServiceNGTest {
 
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyServiceNGTest.class);
+
 	private final UriInfo context = Mockito.mock(UriInfo.class);
 
+	@BeforeTest
+	public void initial() {
+		LOG.info("Start {} times.", System.currentTimeMillis());
+	}
+	
 	@Test
 	public void testGet() {
 		when(context.getPath()).thenReturn("/echo");

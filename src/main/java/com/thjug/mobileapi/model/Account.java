@@ -28,6 +28,13 @@ public class Account implements Serializable {
 	private String firstname;
 	private String lastname;
 
+	public Account() {
+	}
+
+	public Account(final Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

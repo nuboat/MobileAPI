@@ -19,6 +19,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -49,6 +50,12 @@ public class PropertyManager {
 
 	public String getString(final String id) {
 		return em.find(Property.class, id).getString();
+	}
+
+	public Property getByName(final String name) {
+		final Query query = em.createNamedQuery(Property.FIND_BY_NAME, Property.class);
+		query.setParameter(1, name);
+		return (Property) query.getSingleResult();
 	}
 
 }

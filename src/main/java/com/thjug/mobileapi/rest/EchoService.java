@@ -18,9 +18,11 @@ package com.thjug.mobileapi.rest;
 import com.thjug.mobileapi.interceptor.LoggingInterceptor;
 import javax.interceptor.Interceptors;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -37,6 +39,15 @@ import org.slf4j.LoggerFactory;
 public class EchoService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EchoService.class);
+
+	@GET
+	@Interceptors(LoggingInterceptor.class)
+	public String get(
+			@Context UriInfo context,
+			@QueryParam("message") final String message) {
+		LOG.info(" \n URL: {} \n message: {}", context.getPath(), message);
+		return "{{{ " + message + " }}}";
+	}
 
 	@POST
 	@Interceptors(LoggingInterceptor.class)

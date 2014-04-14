@@ -8,3 +8,7 @@ Requirement
  -  Netbeans 8 + Glassfish 4.0 (Free, 210 MB) https://netbeans.org/downloads/
  -  Github App https://help.github.com/articles/set-up-git
  -  PostgreSQL Version 9.3.4  http://www.enterprisedb.com/products-services-training/pgdownload#windows
+
+Config
+-----
+ 1. Config <glassfish4.home.default /> based on your OS.

@@ -6,6 +6,12 @@
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE"/>
 			<property name="eclipselink.logging.parameters" value="true"/>
+
+			<!-- For Cluster
+				<property name="eclipselink.cache.coordination.protocol" value="jms" />
+				<property name="eclipselink.cache.coordination.jms.topic" value="jms/CacheCoordinationTopic" />
+				<property name="eclipselink.cache.coordination.jms.factory" value="jms/CacheCoordinationFactory" />
+			-->
 		</properties>
 	</persistence-unit>
 </persistence>

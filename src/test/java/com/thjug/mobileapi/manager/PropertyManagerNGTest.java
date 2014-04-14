@@ -15,9 +15,13 @@
 package com.thjug.mobileapi.manager;
 
 import com.thjug.mobileapi.container.GlassfishContainer;
+import com.thjug.mobileapi.define.GlobalProperty;
 import com.thjug.mobileapi.entity.Property;
 import javax.naming.NamingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -26,12 +30,17 @@ import org.testng.annotations.Test;
  */
 public class PropertyManagerNGTest {
 
-	final static String ID = "NAME";
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyManagerNGTest.class);
 
-	final Property property;
-	final PropertyManager instance;
+	private static final String ID = GlobalProperty.AUTHOR.toString();
 
-	public PropertyManagerNGTest() throws NamingException {
+	Property property;
+	PropertyManager instance;
+
+	@BeforeTest
+	public void initial() throws NamingException {
+		LOG.info("Start {} times.", System.currentTimeMillis());
+
 		instance = GlassfishContainer.lookup(PropertyManager.class);
 
 		property = new Property();
@@ -41,8 +50,6 @@ public class PropertyManagerNGTest {
 
 	@Test(priority = 1)
 	public void testGetString() throws Exception {
-		System.out.println("testGetString");
-
 		final String id = "VERSION";
 		final String result = instance.getString(id);
 
@@ -51,23 +58,17 @@ public class PropertyManagerNGTest {
 
 	@Test(priority = 2)
 	public void testInsert() {
-		System.out.println("testInsert");
-
 		instance.insert(property);
 		Assert.assertNotNull(property.getId());
 	}
 
 	@Test(priority = 3)
 	public void testGet() {
-		System.out.println("testGet");
-
 		Assert.assertNotNull(instance.get(ID));
 	}
 
 	@Test(priority = 4)
 	public void testUpdate() {
-		System.out.println("testUpdate");
-
 		property.setString("THJUG2");
 		instance.update(property);
 
@@ -77,10 +78,13 @@ public class PropertyManagerNGTest {
 
 	@Test(priority = 5)
 	public void testDelete() {
-		System.out.println("testDelete");
-
 		instance.delete(property);
 		Assert.assertNull(instance.get(property.getId()));
+	}
+
+	@Test(priority = 6)
+	public void testGetByName() {
+		Assert.assertNotNull(instance.getByName("version"));
 	}
 
 }
