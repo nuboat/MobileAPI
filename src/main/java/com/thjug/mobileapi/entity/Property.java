@@ -23,6 +23,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.eclipse.persistence.annotations.Cache;
 
 /**
  *
@@ -30,6 +31,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Cacheable
+@Cache(
+	expiry = 360000
+)
 @NamedQueries({
 	@NamedQuery(name = Property.FIND_ALL, query = "SELECT p FROM Property p ORDER BY p.id"),
 	@NamedQuery(name = Property.FIND_BY_NAME, query = "SELECT p FROM Property p WHERE UPPER(p.id) = UPPER(?1)"),
