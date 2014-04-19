@@ -21,10 +21,8 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,28 +32,25 @@ import org.slf4j.LoggerFactory;
  * @author nuboat
  */
 @Path("echo")
-@Produces(MediaType.APPLICATION_JSON)
 @Interceptors(LoggingInterceptor.class)
 public class EchoService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EchoService.class);
 
 	@GET
-	@Interceptors(LoggingInterceptor.class)
 	public String get(
 			@Context UriInfo context,
 			@QueryParam("message") final String message) {
 		LOG.info(" \n URL: {} \n message: {}", context.getPath(), message);
-		return "{{{ " + message + " }}}";
+		return "get {{{ " + message + " }}}";
 	}
 
 	@POST
-	@Interceptors(LoggingInterceptor.class)
 	public String post(
 			@Context UriInfo context,
 			@FormParam("message") final String message) {
 		LOG.info(" \n URL: {} \n message: {}", context.getPath(), message);
-		return "{{{ " + message + " }}}";
+		return "post {{{ " + message + " }}}";
 	}
 
 }
